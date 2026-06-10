@@ -1,0 +1,22 @@
+services:
+  zookeeper:
+    image: zookeeper:3.8
+    container_name: infra-zookeeper
+    ports:
+      - "2181:2181"
+    volumes:
+      - zookeeper_data:/data
+      - zookeeper_datalog:/datalog
+    networks:
+      - infra-net
+    healthcheck:
+      test: ["CMD", "zkServer.sh", "status"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+volumes:
+  zookeeper_data:
+    name: infra_zookeeper_data
+  zookeeper_datalog:
+    name: infra_zookeeper_datalog

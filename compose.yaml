@@ -1,0 +1,23 @@
+name: microservice-infra
+
+networks:
+  infra-net:
+    driver: bridge
+
+include:
+  - ./postgres/compose.yaml
+  - ./redis/compose.yaml
+  - ./zookeeper/compose.yaml
+  - ./kafka/compose.yaml
+  - ./mongodb/compose.yaml
+  - ./clickhouse/compose.yaml
+  - ./localstack/compose.yaml
+  - ./keycloak/compose.yaml
+  - ./nacos/compose.yaml
+  - ./novu/compose.yaml
+  - ./prometheus/compose.yaml
+  - ./grafana/compose.yaml
+  - ./otel-collector/compose.yaml
+  - ./temporal/compose.yaml
+  - ./xxl-job/compose.yaml
+  - ./apisix-gateway/compose.yaml

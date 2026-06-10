@@ -1,0 +1,14 @@
+services:
+  otel-collector:
+    image: otel/opentelemetry-collector:0.153.0   # 固定版本
+    container_name: infra-otel
+    ports:
+      - "4317:4317"   # OTLP gRPC
+      - "4318:4318"   # OTLP HTTP
+      # 可选：以下端口便于调试和监控
+      - "8888:8888"   # collector 自身指标
+      - "13133:13133" # 健康检查
+    volumes:
+      - ./otel-collector-config.yaml:/etc/otelcol/config.yaml   # 使用官方默认路径
+    networks:
+      - infra-net

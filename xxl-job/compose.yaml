@@ -1,0 +1,38 @@
+services:
+  mysql-xxljob:
+    image: mysql:8.0
+    container_name: infra-mysql-xxljob
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: xxl_job
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_xxljob_data:/var/lib/mysql
+      - ./tables_xxl_job.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - infra-net
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-proot"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  xxl-job-admin:
+    image: xuxueli/xxl-job-admin:2.4.1
+    container_name: infra-xxljob
+    environment:
+      PARAMS: '--spring.datasource.url=jdbc:mysql://mysql-xxljob:3306/xxl_job?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&serverTimezone=Asia/Shanghai
+               --spring.datasource.username=root
+               --spring.datasource.password=root'
+    ports:
+      - "8081:8080"
+    depends_on:
+      mysql-xxljob:
+        condition: service_healthy
+    networks:
+      - infra-net
+
+volumes:
+  mysql_xxljob_data:
+    name: infra_mysql_xxljob_data

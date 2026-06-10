@@ -1,0 +1,21 @@
+services:
+  grafana:
+    image: grafana/grafana:10.4.5
+    container_name: infra-grafana
+    ports:
+      - "3001:3000"
+    volumes:
+      - grafana_data:/var/lib/grafana
+    networks:
+      - infra-net
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+volumes:
+  grafana_data:
+    name: infra_grafana_data

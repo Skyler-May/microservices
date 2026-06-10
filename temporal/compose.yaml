@@ -1,0 +1,23 @@
+services:
+  temporal:
+    image: temporalio/auto-setup:1.23.1
+    container_name: infra-temporal
+    environment:
+      DB: postgresql
+      DB_PORT: 5432
+      POSTGRES_USER: ${POSTGRES_USER:-common}
+      POSTGRES_PWD: ${POSTGRES_PASSWORD:-root}
+      POSTGRES_SEEDS: postgres
+      POSTGRES_DB: temporal_db
+    ports:
+      - "7233:7233"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - infra-net
+    healthcheck:
+      test: ["CMD", "tctl", "--address", "localhost:7233", "cluster", "health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
