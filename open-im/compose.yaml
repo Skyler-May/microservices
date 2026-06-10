@@ -1,0 +1,31 @@
+services:
+  openim-server:
+    image: openim/openim-server:v3.8.3-patch.15
+    container_name: infra-openim-server
+    ports:
+      - "10001:10001"   # WebSocket
+      - "10002:10002"   # API
+    volumes:
+      - ./config:/openim-server/config
+    networks:
+      - infra-net
+    depends_on:
+      mongodb:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      kafka:
+        condition: service_started
+      etcd:
+        condition: service_healthy
+
+  openim-web-front:
+    image: openim/openim-web-front:release-v3.8.3
+    container_name: infra-openim-web-front
+    ports:
+      - "11001:80"
+    networks:
+      - infra-net
+    environment:
+      VITE_REQUEST_URL: http://localhost:10002
+      VITE_WS_URL: ws://localhost:10001

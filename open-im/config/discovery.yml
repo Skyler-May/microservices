@@ -1,0 +1,18 @@
+enable: etcd
+etcd:
+  rootDirectory: openim
+  address: [etcd:2379]
+  username: ""
+  password: ""
+kubernetes:
+  namespace: default
+rpcService:
+  user: user-rpc-service
+  friend: friend-rpc-service
+  msg: msg-rpc-service
+  push: push-rpc-service
+  messageGateway: messagegateway-rpc-service
+  group: group-rpc-service
+  auth: auth-rpc-service
+  conversation: conversation-rpc-service
+  third: third-rpc-service

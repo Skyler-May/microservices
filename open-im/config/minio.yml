@@ -1,0 +1,7 @@
+bucket: openim
+accessKeyID: admin
+secretAccessKey: minio123456
+sessionToken: ""
+internalAddress: minio:9000
+externalAddress: http://localhost:9005
+publicRead: false

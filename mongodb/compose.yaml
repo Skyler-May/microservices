@@ -9,6 +9,7 @@ services:
       - "27017:27017"
     volumes:
       - mongo_data:/data/db
+      - ./init-openim.js:/docker-entrypoint-initdb.d/init-openim.js:ro
     networks:
       - infra-net
     healthcheck:

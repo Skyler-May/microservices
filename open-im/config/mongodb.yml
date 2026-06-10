@@ -1,0 +1,23 @@
+uri: ""
+address: [mongodb:27017]
+database: openim_v3
+username: openIM
+password: openIM123
+authSource: openim_v3
+maxPoolSize: 100
+maxRetry: 10
+mongoMode: "standalone"
+replicaSet:
+  name: rs0
+  hosts: [127.0.0.1:37017]
+  readConcern: majority
+  maxStaleness: 90s
+readPreference:
+  mode: primary
+  maxStaleness: 90s
+  tagSets:
+    - {}
+writeConcern:
+  w: majority
+  j: true
+  wtimeout: 30s

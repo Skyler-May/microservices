@@ -1,0 +1,19 @@
+username: ""
+password: ""
+compressType: none
+address: [kafka:9092]
+toRedisTopic: toRedis
+toMongoTopic: toMongo
+toPushTopic: toPush
+toOfflinePushTopic: toOfflinePush
+toRedisGroupID: redis
+toMongoGroupID: mongo
+toPushGroupID: push
+toOfflinePushGroupID: offlinePush
+tls:
+  enableTLS: false
+  caCrt: ""
+  clientCrt: ""
+  clientKey: ""
+  clientKeyPwd: ""
+  insecureSkipVerify: false

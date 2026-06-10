@@ -1,0 +1,9 @@
+log:
+  storageLocation: ./_output/logs
+  rotationTime: 24
+  rotationSize: 500
+  level: debug
+  remainLogs: 7
+  remainLogLevel: info
+  remainRotationCount: 0
+  WithSource: false

@@ -1,0 +1,15 @@
+prometheus:
+  enable: false
+  autoSetPorts: true
+  ports: []
+ratelimiter:
+  enable: false
+  window: 20s
+  bucket: 500
+  cpuThreshold: 850
+circuitBreaker:
+  enable: false
+  window: 5s
+  bucket: 100
+  success: 0.6
+  request: 500

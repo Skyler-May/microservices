@@ -1,0 +1,24 @@
+rpc:
+  registerIP: ""
+  autoSetPorts: true
+  ports: []
+prometheus:
+  enable: false
+  ports: []
+listenIP: 0.0.0.0
+longConnSvr:
+  ports: [10001]
+  websocketMaxConnNum: 100000
+  websocketMaxMsgLen: 4096
+  websocketTimeout: 10
+ratelimiter:
+  enable: false
+  window: 20s
+  bucket: 500
+  cpuThreshold: 850
+circuitBreaker:
+  enable: false
+  window: 5s
+  bucket: 100
+  success: 0.6
+  request: 500

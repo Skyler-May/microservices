@@ -1,0 +1,7 @@
+secret: openIM123
+imAdminUser:
+  userIDs: [imAdmin]
+  nicknames: [superAdmin]
+multiLogin:
+  policy: 1
+  maxNumOneEnd: 30

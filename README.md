@@ -42,11 +42,13 @@ docker compose ps
 | etcd 3.5 | `quay.io/coreos/etcd:v3.5.15` | 2379 | APISIX 配置存储 |
 | Nginx | `nginx:alpine` | 8082 | 静态代理 / 反向代理 |
 
-### 认证 & 通知
+### 认证 & 通知 & 通讯
 | 服务 | 镜像 | 端口 | 说明 |
 |------|------|------|------|
 | Keycloak 24 | `quay.io/keycloak/keycloak:24.0.4` | 8080 | IAM / 认证授权 |
 | Novu 3.17 | `ghcr.io/novuhq/novu` | 3000/4000/3002 | 多渠道通知中心（API / Dashboard / WS） |
+| Open-IM 3.8 | `openim/openim-server:v3.8.3` | 10001/10002 | 即时通讯服务 |
+| Open-IM Web | `openim/openim-web-front:release-v3.8.3` | 11001 | 即时通讯 Web 客户端 |
 
 ### 可观测性
 | 服务 | 镜像 | 端口 | 说明 |
@@ -152,6 +154,9 @@ flowchart TD
 | 8082 | Nginx | 反向代理 |
 | 5000 | Registry | 私有镜像仓库 |
 | 9005 / 9006 | MinIO | 对象存储 |
+| 10001 | Open-IM | WebSocket 即时通讯 |
+| 10002 | Open-IM | HTTP API |
+| 11001 | Open-IM Web | Web 聊天客户端 |
 
 ## 设计原则
 

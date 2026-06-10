@@ -1,0 +1,14 @@
+api:
+  listenIP: 0.0.0.0
+  ports: [10002]
+  compressionLevel: 0
+prometheus:
+  enable: false
+  autoSetPorts: true
+  ports: []
+  grafanaURL: ""
+ratelimiter:
+  enable: false
+  window: 20s
+  bucket: 500
+  cpuThreshold: 850

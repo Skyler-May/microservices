@@ -1,0 +1,12 @@
+address: [redis:6379]
+username: ""
+password: ""
+redisMode: "standalone"
+db: 0
+maxRetry: 10
+poolSize: 100
+sentinelMode:
+  masterName: "redis-master"
+  sentinelsAddrs: ["127.0.0.1:26379"]
+  routeByLatency: true
+  routeRandomly: true

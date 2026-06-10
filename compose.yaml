@@ -27,3 +27,4 @@ include:
   - ./jaeger/compose.yaml
   - ./nginx/compose.yaml
   - ./registry/compose.yaml
+  - ./open-im/compose.yaml

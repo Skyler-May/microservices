@@ -1,0 +1,64 @@
+notification:
+  groupCreated:
+    isSendMsg: true
+    listen: true
+  groupInfoSet:
+    isSendMsg: true
+    listen: true
+  joinedGroupAdded:
+    isSendMsg: true
+    listen: true
+  joinedGroupDeleted:
+    isSendMsg: true
+    listen: true
+  groupMemberSet:
+    isSendMsg: true
+    listen: true
+  groupMemberInfoSet:
+    isSendMsg: true
+    listen: true
+  groupMemberMuted:
+    isSendMsg: true
+    listen: true
+  groupMemberCancelMuted:
+    isSendMsg: true
+    listen: true
+  groupMemberKicked:
+    isSendMsg: true
+    listen: true
+  groupMemberQuit:
+    isSendMsg: true
+    listen: true
+  groupDismissed:
+    isSendMsg: true
+    listen: true
+  groupMemberTransfer:
+    isSendMsg: true
+    listen: true
+  friendAdded:
+    isSendMsg: true
+    listen: true
+  friendDeleted:
+    isSendMsg: true
+    listen: true
+  friendRemarkSet:
+    isSendMsg: true
+    listen: true
+  blackAdded:
+    isSendMsg: true
+    listen: true
+  blackDeleted:
+    isSendMsg: true
+    listen: true
+  friendInfoSet:
+    isSendMsg: true
+    listen: true
+  userInfoSet:
+    isSendMsg: true
+    listen: true
+  conversationChanged:
+    isSendMsg: true
+    listen: true
+  userStatusChange:
+    isSendMsg: true
+    listen: true

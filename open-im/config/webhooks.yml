@@ -1,0 +1,21 @@
+url: ""
+beforeSendSingleMsg:
+  enable: false
+  timeout: 5
+  failedContinue: true
+  deniedTypes: []
+afterSendSingleMsg:
+  enable: false
+  timeout: 5
+  attentionIds: []
+  deniedTypes: []
+beforeSendGroupMsg:
+  enable: false
+  timeout: 5
+  failedContinue: true
+  deniedTypes: []
+afterSendGroupMsg:
+  enable: false
+  timeout: 5
+  attentionIds: []
+  deniedTypes: []
