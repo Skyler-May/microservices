@@ -21,3 +21,9 @@ include:
   - ./temporal/compose.yaml
   - ./xxl-job/compose.yaml
   - ./apisix-gateway/compose.yaml
+  - ./minio/compose.yaml
+  - ./loki/compose.yaml
+  - ./elasticsearch/compose.yaml
+  - ./jaeger/compose.yaml
+  - ./nginx/compose.yaml
+  - ./registry/compose.yaml

@@ -6,6 +6,7 @@ services:
       - "3001:3000"
     volumes:
       - grafana_data:/var/lib/grafana
+      - ./provisioning:/etc/grafana/provisioning
     networks:
       - infra-net
     environment:

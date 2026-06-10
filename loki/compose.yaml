@@ -1,0 +1,21 @@
+services:
+  loki:
+    image: grafana/loki:3.0.0
+    container_name: infra-loki
+    ports:
+      - "3100:3100"
+    volumes:
+      - ./loki-config.yaml:/etc/loki/loki-config.yaml
+      - loki_data:/loki
+    command: -config.file=/etc/loki/loki-config.yaml
+    networks:
+      - infra-net
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:3100/ready"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+volumes:
+  loki_data:
+    name: infra_loki_data

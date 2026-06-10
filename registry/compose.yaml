@@ -1,0 +1,19 @@
+services:
+  registry:
+    image: registry:2
+    container_name: infra-registry
+    ports:
+      - "5000:5000"
+    volumes:
+      - registry_data:/var/lib/registry
+    networks:
+      - infra-net
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/v2/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+volumes:
+  registry_data:
+    name: infra_registry_data
