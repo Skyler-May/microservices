@@ -1,5 +1,3 @@
-file_format: "0.1"   # 必须的顶层属性，表示配置文件格式版本
-
 receivers:
   otlp:
     protocols:
