@@ -30,10 +30,33 @@ docker compose ps
 ### 消息 & 配置 & 工作流
 | 服务 | 镜像 | 端口 | 说明 |
 |------|------|------|------|
-| Kafka 4.3 | `apache/kafka:4.3` | 9092 | 事件总线 |
+| Kafka 4.3 | `apache/kafka:4.3` | 9092 | 事件总线（基础设施消息中间件） |
 | ZooKeeper 3.8 | `zookeeper:3.8` | 2181 | Kafka 协调 |
 | Nacos 2.2 | `nacos/nacos-server:v2.2.3` | 8848 | 配置 / 注册中心 |
 | Temporal 1.23 | `temporalio/auto-setup:1.23.1` | 7233 | 工作流引擎 |
+
+### 消息适配层（代码库）
+| 模块 | 说明 |
+|------|------|
+| [`infra-adapter/message/api`](infra-adapter/message/api) | 统一消息接口（MessageProducer、EventBus、@MessageListener） |
+| [`infra-adapter/message/kafka`](infra-adapter/message/kafka) | Kafka Binder 实现（基于 Kafka Topic 模型） |
+| [`infra-adapter/message/rabbit`](infra-adapter/message/rabbit) | RabbitMQ Binder 实现（兼容遗留/外部 RabbitMQ 服务） |
+
+> **设计原则**：业务服务面向 `infra-adapter/message/api` 编程，底层消息中间件可切换。
+> Kafka 为基础设施默认事件总线，RabbitMQ binder 用于对接遗留项目或外部系统。
+> 详见 [`docs/message-layer.md`](docs/message-layer.md)。
+
+### 适配层目录结构
+
+```
+infra-adapter/          ← 基础设施适配层（统一收拢）
+├── message/            ← 基础消息（已就绪）
+│   ├── api/            ← 接口层
+│   ├── kafka/          ← Kafka Binder
+│   └── rabbit/         ← RabbitMQ Binder
+├── cache/              ← 基础缓存（规划中）
+└── storage/            ← 基础存储（规划中）
+```
 
 ### 网关 & 代理
 | 服务 | 镜像 | 端口 | 说明 |
@@ -91,14 +114,29 @@ flowchart TD
     APISIX --> S6["游戏服务"]
     APISIX --> S7["···"]
 
-    S1 & S2 & S3 & S4 & S5 & S6 --> INFRA
+    S1 & S2 & S3 & S4 & S5 & S6 --> ADAPTER
+
+    subgraph ADAPTER["消息适配层 infra-message"]
+        direction LR
+        API["统一 API\nMessageProducer\nEventBus\n@MessageListener"]
+        KAFKA_BINDER["Kafka Binder\n✅ 基础设施默认"]
+        RABBIT_BINDER["RabbitMQ Binder\n✅ 遗留/外部系统兼容"]
+        API --> KAFKA_BINDER
+        API --> RABBIT_BINDER
+    end
+
+    KAFKA_BINDER --- KAFKA_BROKER
+    RABBIT_BINDER --- RABBIT_BROKER
+
+    ADAPTER --> INFRA
 
     subgraph INFRA["基础设施层"]
         direction TB
 
         subgraph MSG["消息 / 配置 / 工作流"]
             Nacos["Nacos\n配置 / 注册中心"]
-            Kafka["Kafka\n事件总线"]
+            KAFKA_BROKER["Kafka\n事件总线"]
+            RABBIT_BROKER["RabbitMQ\n（外部/遗留系统）"]
             Temporal["Temporal\n工作流引擎"]
         end
 

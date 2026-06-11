@@ -3,3 +3,7 @@
 
 # 忽略创建 API 配置文件（下划线命名，仅本地兼容用）
 apisix-gateway/apisix_config.yaml
+
+# Gradle 构建产物
+infra-adapter/**/build/
+infra-adapter/**/.gradle/
